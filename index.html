@@ -1,930 +1,1096 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MollyNodes | Premium Servers & Web Hosting</title>
-    <!-- Typography: Space Grotesk for headings, Inter for body -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+    <title>MollyNodes | Premium Hosting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #05070a;
-            --bg-panel: rgba(15, 18, 25, 0.6);
-            --bg-card: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-hover: rgba(255, 255, 255, 0.12);
+            --bg-main: #0B0E14;
+            --bg-card: #151A25;
+            --bg-card-hover: #1A202C;
+            --bg-nav: rgba(11, 14, 20, 0.95);
+            --border-color: #2D3748;
             
-            --primary-blue: #3b82f6;
-            --primary-blue-hover: #2563eb;
-            --primary-blue-glow: rgba(59, 130, 246, 0.5);
-            --primary-green: #10b981;
-            --primary-green-glow: rgba(16, 185, 129, 0.5);
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0AEC0;
             
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --text-bright: #e2e8f0;
+            --accent-blue: #3B82F6;
+            --accent-blue-hover: #2563EB;
+            --accent-green: #10B981;
+            --accent-green-hover: #059669;
             
-            --font-heading: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', sans-serif;
-            
-            --blur-radius: blur(20px);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-main: 'Inter', sans-serif;
+            --transition: all 0.2s ease;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            overflow-x: hidden;
-            line-height: 1.7;
-            background-image: 
-                radial-gradient(circle at 10% 0%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 90% 100%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
-            background-attachment: fixed;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        h1, h2, h3, h4, h5, h6, .logo {
-            font-family: var(--font-heading);
-            letter-spacing: -0.02em;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-main); }
+        body { background-color: var(--bg-main); color: var(--text-primary); overflow-x: hidden; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+        /* Icons SVG Styles */
+        .icon-sm { width: 16px; height: 16px; }
+        .icon-md { width: 20px; height: 20px; }
+        .icon-lg { width: 24px; height: 24px; }
+        .text-blue { color: var(--accent-blue); }
+        .text-green { color: var(--accent-green); }
 
-        /* --- Navbar --- */
+        /* Container */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+        /* Navbar */
         .navbar {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            padding: 0.8rem 0; /* Reduced height */
-            z-index: 1000;
-            background: rgba(5, 7, 10, 0.75);
-            backdrop-filter: var(--blur-radius);
-            -webkit-backdrop-filter: var(--blur-radius);
-            border-bottom: 1px solid var(--glass-border);
-            transition: var(--transition);
+            position: fixed; top: 0; width: 100%; height: 70px; background: var(--bg-nav);
+            border-bottom: 1px solid var(--border-color); z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 2rem;
         }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: -1px;
-            transition: var(--transition);
-        }
-        .logo:hover { transform: scale(1.02); }
-        .logo span { color: var(--primary-blue); text-shadow: 0 0 15px var(--primary-blue-glow); }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            position: relative;
-        }
-
-        .nav-links a svg { width: 18px; height: 18px; transition: var(--transition); }
+        .nav-left { display: flex; align-items: center; gap: 3rem; }
+        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px; }
+        .logo svg { color: var(--accent-blue); width: 28px; height: 28px; }
         
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -6px; left: 0; width: 0%; height: 2px;
-            background: var(--primary-blue); transition: width 0.3s ease; border-radius: 2px;
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { 
+            font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); 
+            display: flex; align-items: center; gap: 8px; transition: var(--transition);
+            padding-bottom: 23px; position: relative; top: 12px;
         }
-        .nav-links a:hover, .nav-links a.active { color: #fff; }
-        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-        .nav-links a.active { font-weight: 600; color: #fff; }
-        .nav-links a.active svg { color: var(--primary-blue); }
-
-        .mobile-toggle {
-            display: none; background: none; border: none; color: #fff; cursor: pointer;
+        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+        .nav-links a.active::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--accent-blue);
         }
 
-        /* --- Global Buttons --- */
-        .btn {
-            padding: 0.8rem 2rem;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            font-family: var(--font-body);
-            cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid transparent;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-align: center;
-        }
+        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-icons { display: flex; gap: 1rem; color: var(--text-secondary); align-items: center; }
+        .nav-icons svg { cursor: pointer; transition: var(--transition); }
+        .nav-icons svg:hover { color: var(--text-primary); }
+        .flag-icon { width: 24px; border-radius: 2px; }
 
-        .btn-blue {
-            background: var(--primary-blue);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        .btn-client {
+            background: var(--accent-blue); color: white; padding: 0.6rem 1.2rem;
+            border-radius: 6px; font-weight: 700; font-size: 0.85rem;
+            display: flex; align-items: center; gap: 8px; transition: var(--transition);
         }
-        .btn-blue:hover {
-            background: var(--primary-blue-hover);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
-            transform: translateY(-2px);
-        }
+        .btn-client:hover { background: var(--accent-blue-hover); }
 
-        .btn-outline {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: var(--glass-border);
-            color: #fff;
+        /* Floating Fixed Buttons */
+        .fixed-btn {
+            position: fixed; bottom: 2rem; width: 50px; height: 50px; border-radius: 50%;
+            background: #1E40AF; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 1000; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
+        .theme-btn { left: 2rem; background: rgba(30, 64, 175, 0.3); border: 1px solid rgba(59, 130, 246, 0.5); }
+        .cookie-btn { right: 2rem; background: var(--accent-blue); }
 
-        /* Reduced Client Space Button */
-        .btn-client-space {
-            padding: 0.5rem 1.2rem;
-            font-size: 0.85rem;
-            border-radius: 8px;
-        }
+        /* View Setup */
+        .view { display: none; padding-top: 100px; min-height: 100vh; padding-bottom: 100px; }
+        .view.active { display: block; }
 
-        /* --- Page Routing --- */
-        .page-view {
-            display: none;
-            padding-top: 120px;
-            min-height: calc(100vh - 100px);
-            animation: fadeScale 0.4s ease-out forwards;
+        /* Hero Section */
+        .hero { position: relative; padding: 4rem 0; overflow: hidden; }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(11,14,20,1) 30%, rgba(11,14,20,0.5) 100%), 
+                        url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzE1MUEyNSIvPjwvc3ZnPg==') center/cover;
+            z-index: -1;
         }
-        .page-view.active { display: block; }
-
-        @keyframes fadeScale {
-            from { opacity: 0; transform: translateY(15px) scale(0.99); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* --- Shared Headers --- */
-        .page-header {
-            text-align: left;
-            margin-bottom: 4rem;
-            max-width: 800px;
-        }
-        .page-header h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.1; }
-        .page-header h1 span { color: var(--primary-blue); }
-        .page-header.green h1 span { color: var(--primary-green); }
-        .page-header p { color: var(--text-bright); font-size: 1.15rem; line-height: 1.6; }
-
-        /* --- Hero Section (Home) --- */
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Visually equal columns */
-            gap: 3rem;
-            align-items: center;
-            padding: 20px 0 60px 0;
-        }
-
-        .hero-content h1 {
-            font-size: 3.6rem; /* Reduced by ~20% */
-            font-weight: 800; 
-            line-height: 1.1; 
-            margin-bottom: 1.2rem;
-            position: relative;
-        }
-        .hero-content h1 span {
-            color: var(--primary-blue); display: block;
-            text-shadow: 0 0 30px var(--primary-blue-glow);
-        }
-        .hero-content p {
-            color: var(--text-bright); /* Increased readability */
-            font-size: 1.15rem; 
-            margin-bottom: 2rem; 
-            max-width: 95%; 
-            line-height: 1.6;
-        }
-
-        .hero-action-area {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .hero-buttons {
-            display: flex; 
-            gap: 1rem; 
-            flex-wrap: wrap;
-        }
-
-        .hero-trust {
-            display: flex; 
-            gap: 1.2rem; 
-            color: var(--text-muted); 
-            font-size: 0.85rem; 
-            font-weight: 500;
-            flex-wrap: wrap;
-            padding-left: 5px;
-        }
-        .hero-trust span { display: flex; align-items: center; gap: 6px; }
-        .hero-trust svg { color: var(--primary-blue); width: 16px; }
-
-        /* Improved Feature Cards fitting */
-        .hero-features { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 1.2rem; 
-        }
-        .hero-feature-card {
-            background: var(--bg-panel); border: 1px solid var(--glass-border);
-            border-radius: 16px; padding: 1.5rem; backdrop-filter: var(--blur-radius);
-            transition: var(--transition);
-            position: relative; overflow: hidden;
-        }
-        .hero-feature-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--glass-hover), transparent); opacity: 0; transition: var(--transition);
-        }
-        .hero-feature-card:hover {
-            transform: translateY(-5px); border-color: rgba(59, 130, 246, 0.4);
-            background: rgba(59, 130, 246, 0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .hero-feature-card:hover::before { opacity: 1; }
-        .hf-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
-        .hf-header h3 { font-size: 1.1rem; font-weight: 700; font-family: var(--font-heading); }
-        .hf-icon { color: var(--primary-blue); width: 22px; height: 22px; }
-        .hero-feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
-
-        /* --- Pricing Cards --- */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 5rem;
-        }
-
-        .pricing-card {
-            background: var(--bg-panel); border: 1px solid var(--glass-border);
-            border-radius: 24px; padding: 2.5rem; position: relative; transition: var(--transition);
-            backdrop-filter: var(--blur-radius); display: flex; flex-direction: column; overflow: hidden;
-        }
-
-        .pricing-card::after {
-            content: ''; position: absolute; inset: 0; border-radius: 24px;
-            box-shadow: inset 0 0 0 1px transparent; transition: var(--transition); pointer-events: none;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(59, 130, 246, 0.1);
-            background: rgba(20, 24, 35, 0.8);
-        }
-        .pricing-card:hover::after { box-shadow: inset 0 0 0 1px var(--primary-blue); }
-
-        .pricing-card.featured {
-            border-color: rgba(59, 130, 246, 0.5);
-            background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, var(--bg-panel) 100%);
-        }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .hero-content h1 { font-size: 4.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero-content h1 span { color: var(--accent-blue); }
+        .hero-content p { color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 2.5rem; max-width: 90%; }
         
-        .theme-green .pricing-card:hover::after { box-shadow: inset 0 0 0 1px var(--primary-green); }
-        .theme-green .pricing-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(16, 185, 129, 0.1); }
+        .hero-btns { display: flex; gap: 1rem; align-items: center; }
+        .btn-primary { 
+            background: var(--accent-blue); color: white; padding: 0.8rem 1.8rem; 
+            border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 8px; 
+        }
+        .btn-secondary { color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 8px; }
+
+        .hero-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .h-feature { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; }
+        .h-f-top { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .h-f-title { font-weight: 700; font-size: 1.1rem; }
+        .h-f-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; }
+
+        /* Filter Sections (Common) */
+        .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .section-subtitle { color: var(--text-secondary); margin-bottom: 2.5rem; }
         
-        .popular-badge {
-            position: absolute; top: 1.5rem; right: 1.5rem;
-            background: var(--primary-blue); color: #fff;
-            padding: 6px 14px; border-radius: 30px;
-            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px;
-            text-transform: uppercase;
+        .filters { display: flex; gap: 3rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-group { display: flex; flex-direction: column; gap: 0.8rem; }
+        .filter-label { color: var(--text-secondary); font-size: 0.85rem; font-weight: 600; }
+        .filter-options { display: flex; gap: 1rem; }
+        .f-btn {
+            background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-secondary);
+            padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+            display: flex; align-items: center; gap: 8px; cursor: pointer; transition: var(--transition);
+        }
+        .f-btn.active.blue { border-color: var(--accent-blue); background: rgba(59, 130, 246, 0.05); color: var(--text-primary); }
+        .f-btn.active.green { border-color: var(--accent-green); background: rgba(16, 185, 129, 0.05); color: var(--text-primary); }
+        .f-btn img { width: 20px; border-radius: 2px; }
+
+        .software-box {
+            background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-green);
+            padding: 1rem 1.5rem; border-radius: 8px; display: inline-flex; flex-direction: column;
+        }
+        .soft-title { color: var(--text-primary); font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .badge-green { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; }
+        .soft-desc { color: var(--text-secondary); font-size: 0.8rem; margin-top: 4px; }
+
+        /* Card Grids */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        
+        .plan-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 1.5rem; transition: var(--transition);
+            display: flex; flex-direction: column; position: relative;
+        }
+        .plan-card:hover { border-color: var(--text-secondary); }
+        .card-title { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.2rem; margin-bottom: 1.5rem; }
+        .card-title img { width: 24px; border-radius: 2px; }
+        
+        .popular-tag {
+            position: absolute; top: 1rem; right: 1rem; background: var(--accent-blue);
+            color: white; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 12px;
         }
 
-        .plan-name { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 8px;}
-        .plan-sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
+        .specs-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; flex-grow: 1; }
+        .spec-item { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; font-weight: 500; }
+        .spec-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+        
+        /* Two column specs for Web/Bot */
+        .specs-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 0.5rem; margin-bottom: 2rem; flex-grow: 1;}
+        .spec-col { display: flex; flex-direction: column; gap: 4px; }
+        .spec-label { display: flex; align-items: center; gap: 6px; color: var(--text-secondary); font-size: 0.8rem; }
+        .spec-val { font-weight: 700; font-size: 1rem; }
 
-        .specs-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 2rem;
-            padding-bottom: 2rem; border-bottom: 1px solid var(--glass-border);
-        }
-
-        .spec-item { display: flex; flex-direction: column; gap: 4px; }
-        .spec-label { display: flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.85rem; font-weight: 500;}
-        .spec-value { font-size: 1.05rem; font-weight: 600; color: #fff; }
-        .spec-icon { width: 16px; height: 16px; opacity: 0.8; color: var(--primary-blue); }
-        .theme-green .spec-icon { color: var(--primary-green); }
-
-        .features-list { flex-grow: 1; margin-bottom: 2.5rem; }
-        .features-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; font-size: 0.95rem; color: #cbd5e1; }
-        .features-list li svg { width: 18px; height: 18px; color: var(--primary-blue); flex-shrink: 0; }
-        .theme-green .features-list li svg { color: var(--primary-green); }
-
-        .price-wrap { display: flex; align-items: baseline; gap: 6px; margin-bottom: 1.5rem; }
-        .price { font-size: 2.8rem; font-weight: 800; font-family: var(--font-heading); letter-spacing: -1px; }
-        .price-period { color: var(--text-muted); font-weight: 500; }
-
+        .price-box { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; }
+        .price-box span { font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); }
+        
         .btn-order {
-            width: 100%; padding: 1.2rem; border-radius: 12px;
-            background: var(--primary-blue); color: #fff; border: none;
-            font-weight: 600; font-size: 1.05rem; cursor: pointer; transition: var(--transition);
-            display: flex; justify-content: center; align-items: center; gap: 8px;
+            width: 100%; padding: 0.8rem; border-radius: 6px; font-weight: 700; font-size: 0.95rem;
+            display: flex; align-items: center; justify-content: center; gap: 8px; border: none; cursor: pointer;
+            background: rgba(255,255,255,0.05); color: var(--text-primary); transition: var(--transition);
         }
-        .btn-order:hover {
-            background: var(--primary-blue-hover); transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
-        }
-        .theme-green .btn-order { background: rgba(16, 185, 129, 0.1); color: var(--primary-green); border: 1px solid rgba(16, 185, 129, 0.3); }
-        .theme-green .btn-order:hover { background: var(--primary-green); color: #fff; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); }
+        .btn-order.green:hover { background: var(--accent-green); color: white; }
+        .btn-order.blue:hover { background: var(--accent-blue); color: white; }
+        
+        /* Dedicated Spec specific */
+        .dedi-list { border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: 0.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem;}
+        .dedi-list li { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); }
+        .dedi-list li svg { color: var(--accent-blue); width: 16px; height: 16px; }
 
-        /* --- VPS Horizontal Layout --- */
-        .vps-list { max-width: 1100px; }
+        /* VPS Horizontal Cards */
+        .vps-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; max-width: 1100px; }
         .vps-card {
-            display: grid; grid-template-columns: 180px 1fr 1fr 1fr auto 180px;
-            align-items: center; gap: 2rem; background: var(--bg-panel);
-            border: 1px solid var(--glass-border); border-radius: 16px;
-            padding: 1.5rem 2.5rem; margin-bottom: 1.2rem; transition: var(--transition);
-            backdrop-filter: var(--blur-radius);
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 1.2rem 2rem; display: flex; align-items: center; justify-content: space-between;
         }
-        .vps-card:hover {
-            border-color: var(--primary-blue); background: rgba(255,255,255,0.03); 
-            transform: scale(1.01) translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
-        .vps-badge {
-            background: rgba(15, 23, 42, 0.8); padding: 12px; border-radius: 10px; 
-            display: flex; align-items: center; justify-content: center; gap: 10px; 
-            font-weight: 700; border: 1px solid var(--glass-border); font-family: var(--font-heading);
-        }
-        .vps-spec { display: flex; flex-direction: column; gap: 4px; }
-        .vps-spec span:first-child { color: var(--text-muted); font-size: 0.85rem; display: flex; align-items: center; gap: 6px; font-weight: 500;}
-        .vps-spec span:last-child { font-weight: 700; color: #fff; font-size: 1.1rem; }
-        .vps-price { font-size: 1.5rem; font-weight: 800; font-family: var(--font-heading); }
-        .vps-card .btn-blue { width: 100%; }
+        .vps-badge { background: #1E293B; padding: 10px; border-radius: 8px; display: flex; align-items: center; gap: 10px; font-weight: 700; width: 140px; }
+        .vps-stat { display: flex; align-items: center; gap: 12px; width: 120px; }
+        .vps-stat-icon { color: var(--accent-blue); }
+        .vps-stat-info { display: flex; flex-direction: column; gap: 2px; }
+        .vps-stat-label { color: var(--text-secondary); font-size: 0.75rem; }
+        .vps-stat-val { font-weight: 600; font-size: 0.95rem; }
+        .vps-price { font-size: 1.25rem; font-weight: 800; color: var(--accent-blue); width: 120px; text-align: right;}
+        .vps-price span { font-size: 0.8rem; color: var(--text-secondary); font-weight: 500; }
 
-        /* --- Legal Page (Complete ToS) --- */
-        .legal-layout { display: grid; grid-template-columns: 280px 1fr; gap: 5rem; align-items: start; }
-        .legal-sidebar { 
-            display: flex; flex-direction: column; gap: 8px; position: sticky; top: 100px;
-            background: var(--bg-panel); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--glass-border);
-        }
-        .legal-sidebar a { 
-            padding: 10px 14px; border-radius: 10px; color: var(--text-muted); font-size: 0.95rem; 
-            transition: var(--transition); font-weight: 500; cursor: pointer;
-        }
-        .legal-sidebar a:hover { background: rgba(255,255,255,0.05); color: #fff; }
-        .legal-sidebar a.active { background: rgba(59, 130, 246, 0.1); color: var(--primary-blue); font-weight: 600; border: 1px solid rgba(59, 130, 246, 0.2);}
+        /* OS Selection */
+        .os-grid { display: flex; gap: 3rem; justify-content: center; margin-top: 3rem; flex-wrap: wrap; }
+        .os-item { display: flex; flex-direction: column; align-items: center; gap: 1rem; cursor: pointer; }
+        .os-icon { width: 80px; height: 80px; border-radius: 50%; background: #1A202C; display: flex; align-items: center; justify-content: center; }
+        .os-icon img { width: 45px; height: 45px; }
+        .os-name { font-weight: 600; }
+
+        /* Legal Page */
+        .legal-layout { display: grid; grid-template-columns: 280px 1fr; gap: 4rem; max-width: 1000px; margin: 0 auto; }
+        .legal-title { text-align: center; margin-bottom: 3rem; }
+        .legal-title h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .legal-title h1 span { color: var(--accent-blue); }
+        .legal-title p { color: var(--text-secondary); }
         
-        .legal-content h2 { 
-            font-size: 1.8rem; margin-top: 3rem; margin-bottom: 1.2rem; color: #fff; 
-            border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;
-            scroll-margin-top: 120px; /* Ensures fixed header doesn't cover title when scrolled */
-        }
+        .legal-nav { display: flex; flex-direction: column; gap: 5px; }
+        .legal-nav a { padding: 12px 16px; border-radius: 8px; color: var(--text-secondary); font-size: 0.95rem; transition: var(--transition); }
+        .legal-nav a.active { background: var(--accent-blue); color: white; font-weight: 600; }
+        
+        .legal-content h2 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: white; }
         .legal-content h2:first-child { margin-top: 0; }
-        .legal-content p { color: var(--text-bright); margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.05rem; }
+        .legal-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem; font-size: 0.95rem; }
 
-        /* --- Discord CTA --- */
-        .discord-cta {
-            background: linear-gradient(135deg, rgba(88, 101, 242, 0.15) 0%, rgba(15, 18, 25, 0.9) 100%);
-            border: 1px solid rgba(88, 101, 242, 0.3); border-radius: 24px;
-            padding: 5rem 2rem; text-align: center; margin: 80px 0;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            position: relative; overflow: hidden;
-        }
-        .discord-cta::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(88,101,242,0.1) 0%, transparent 60%); pointer-events: none;
-        }
-        .discord-cta h2 { font-size: 3rem; margin-bottom: 1.2rem; font-family: var(--font-heading); }
-        .discord-cta p { color: var(--text-bright); margin-bottom: 2.5rem; font-size: 1.15rem; max-width: 600px; margin-left: auto; margin-right: auto;}
-        
-        .btn-discord { 
-            background: #5865F2; border-color: #5865F2; color: #fff; padding: 1rem 2.5rem; font-size: 1.1rem;
-        }
-        .btn-discord:hover { background: #4752C4; box-shadow: 0 10px 25px rgba(88, 101, 242, 0.5); transform: translateY(-3px); }
-
-        footer { border-top: 1px solid var(--glass-border); padding: 3rem 0; text-align: center; color: var(--text-muted); font-size: 0.95rem; }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 3rem;}
-            .hero-content p { margin: 0 auto 2rem auto; }
-            .hero-buttons, .hero-trust { justify-content: center; }
-            .legal-layout { grid-template-columns: 1fr; gap: 3rem; }
-            .legal-sidebar { position: static; }
-            .vps-card { 
-                grid-template-columns: 1fr 1fr; 
-                gap: 1.5rem; text-align: center; 
-                padding: 2rem;
-            }
-            .vps-badge { justify-content: center; grid-column: 1 / -1; }
-            .vps-card .btn-blue { grid-column: 1 / -1; }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links { 
-                position: absolute; top: 100%; left: 0; right: 0;
-                background: rgba(5, 7, 10, 0.98); flex-direction: column;
-                padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--glass-border);
-                transform: translateY(-10px); opacity: 0; pointer-events: none; transition: var(--transition);
-            }
-            .nav-links.active-mobile {
-                transform: translateY(0); opacity: 1; pointer-events: auto;
-            }
-            .mobile-toggle { display: block; }
-            .nav-content .btn-blue { display: none; } 
-            
-            .hero-content h1 { font-size: 2.8rem; }
-            .hero-features { grid-template-columns: 1fr; }
-            .page-header h1 { font-size: 2.8rem; }
-            
-            .vps-card { grid-template-columns: 1fr; }
-        }
     </style>
 </head>
 <body>
 
+    <!-- Floating Buttons -->
+    <div class="fixed-btn theme-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+    </div>
+    <div class="fixed-btn cookie-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 12.5v.01"/><path d="M12 16v.01"/><path d="M11 12.5v.01"/></svg>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="container nav-content">
-            <!-- Logo routes to home -->
-            <a href="#home" class="logo">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                Molly<span>Nodes</span>
+        <div class="nav-left">
+            <a href="#games" class="logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 22h20L12 2z"/><circle cx="12" cy="14" r="4"/></svg>
+                MollyNodes
             </a>
-            
-            <button class="mobile-toggle" aria-label="Toggle Menu">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-            </button>
-
             <div class="nav-links">
-                <a href="#games"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"/><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"/></svg> Games</a>
-                <a href="#cloud"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg> Cloud</a>
-                <a href="#dedicated"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg> Dedicated</a>
-                <a href="#web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> WebHosting</a>
-                <a href="#legal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Legal</a>
+                <a href="#games" id="nav-games" class="active"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"/></svg> Games</a>
+                <a href="#cloud" id="nav-cloud"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg> Cloud</a>
+                <a href="#dedicated" id="nav-dedicated"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg> Dedicated</a>
+                <a href="#bot" id="nav-bot"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg> Discord Bot</a>
+                <a href="#web" id="nav-web"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> WebHosting</a>
+                <a href="#legal" id="nav-legal"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Legal</a>
             </div>
-            
-            <!-- Discord CTA Replacement (Reduced Size) -->
-            <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn btn-blue btn-client-space">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="nav-right">
+            <div class="nav-icons">
+                <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank"><svg class="icon-md" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a>
+                <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <div style="width: 24px; height: 16px; background: repeating-linear-gradient(#B22234 0 2px, #fff 2px 4px); position: relative;">
+                    <div style="background: #3C3B6E; width: 10px; height: 8px; position: absolute; top:0; left:0;"></div>
+                </div>
+            </div>
+            <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn-client">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 CLIENT SPACE
             </a>
         </div>
     </nav>
 
-    <!-- Multi-page Container -->
-    <div id="app">
-
-        <!-- ================= HOME PAGE ================= -->
-        <main id="home" class="page-view active">
+    <!-- ================= GAMES (HOME + MINECRAFT) ================= -->
+    <main id="view-games" class="view active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg"></div>
             <div class="container hero-grid">
                 <div class="hero-content">
                     <h1>Host your own<br><span>Minecraft Servers</span></h1>
-                    <p>Experience lightning-fast performance, unbeatable reliability, and premium 24/7 support for all your favorite games and applications.</p>
-                    
-                    <div class="hero-action-area">
-                        <div class="hero-buttons">
-                            <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Get Started →</a>
-                            <a href="#games" class="btn btn-outline">View Plans ↗</a>
-                        </div>
-                        <!-- Trust Indicators Below CTA -->
-                        <div class="hero-trust">
-                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 99.9% Uptime</span>
-                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> DDoS Protection</span>
-                            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 24/7 Support</span>
-                        </div>
+                    <p>Experience lightning-fast performance, unbeatable reliability, and 24/7 support for all your favorite games.</p>
+                    <div class="hero-btns">
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-primary">Get started →</a>
+                        <a href="#" class="btn-secondary">Learn More <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
                     </div>
                 </div>
-                
                 <div class="hero-features">
-                    <div class="hero-feature-card">
-                        <div class="hf-header">
-                            <h3>Instant Setup</h3>
-                            <svg class="hf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    <div class="h-feature">
+                        <div class="h-f-top">
+                            <span class="h-f-title">Instant Setup</span>
+                            <svg class="text-blue icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                         </div>
-                        <p>Get your server running in under 60 seconds after deployment request.</p>
+                        <p class="h-f-desc">Get your server running in under 60 seconds</p>
                     </div>
-                    <div class="hero-feature-card">
-                        <div class="hf-header">
-                            <h3>DDoS Protection</h3>
-                            <svg class="hf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <div class="h-feature">
+                        <div class="h-f-top">
+                            <span class="h-f-title">DDoS Protection</span>
+                            <svg class="text-blue icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                         </div>
-                        <p>Enterprise-grade security rules tailored for your specific applications.</p>
+                        <p class="h-f-desc">Enterprise-grade security for your servers</p>
                     </div>
-                    <div class="hero-feature-card">
-                        <div class="hf-header">
-                            <h3>99.9% Uptime</h3>
-                            <svg class="hf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <div class="h-feature">
+                        <div class="h-f-top">
+                            <span class="h-f-title">99.9% Uptime</span>
+                            <svg class="text-blue icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                         </div>
-                        <p>Highly redundant network architecture with guaranteed availability.</p>
+                        <p class="h-f-desc">Reliable hosting with guaranteed availability</p>
                     </div>
-                    <div class="hero-feature-card">
-                        <div class="hf-header">
-                            <h3>24/7 Support</h3>
-                            <svg class="hf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <div class="h-feature">
+                        <div class="h-f-top">
+                            <span class="h-f-title">24/7 Support</span>
+                            <svg class="text-blue icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         </div>
-                        <p>Direct access to expert server administrators via our Discord.</p>
+                        <p class="h-f-desc">Expert help whenever you need it</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Selection Section -->
+        <section class="container" style="margin-top: 4rem;">
+            <h2 class="section-title">Choose your <span class="text-green">Game Server</span></h2>
+            <p class="section-subtitle">Select from our wide range of optimized game servers. Each server is configured for maximum performance and comes with DDoS protection.</p>
+
+            <div class="filters">
+                <div class="filter-group">
+                    <span class="filter-label">1. Plan Type</span>
+                    <div class="filter-options">
+                        <div class="f-btn"><svg class="text-green icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> Budget intel Gold</div>
+                        <div class="f-btn active green"><svg class="text-blue icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> Premium Ryzen 9</div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">2. Location</span>
+                    <div class="filter-options">
+                        <div class="f-btn active green">
+                            <div style="width: 20px; height: 14px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div> Mumbai
+                        </div>
+                        <div class="f-btn">
+                            <div style="width: 20px; height: 14px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div> delhi
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Discord CTA Shared Section -->
-            <section class="container">
-                <div class="discord-cta">
-                    <h2>Join the MollyNodes Community</h2>
-                    <p>Get exclusive discounts, rapid support, and connect directly with our engineering team to deploy your infrastructure.</p>
-                    <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn btn-discord">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-                        Join Discord To Order
-                    </a>
-                </div>
-            </section>
-        </main>
-
-        <!-- ================= GAMES PAGE (Minecraft) ================= -->
-        <main id="games" class="page-view theme-green">
-            <div class="container">
-                <div class="page-header green">
-                    <h1>Choose your <span>Game Server</span></h1>
-                    <p>Select from our wide range of optimized game servers. Each server is configured for maximum single-thread performance.</p>
-                </div>
-
-                <div class="pricing-grid">
-                    <!-- Minecraft 2GB -->
-                    <div class="pricing-card">
-                        <h3 class="plan-name">Minecraft 2GB</h3>
-                        <p class="plan-sub">Premium Server</p>
-                        
-                        <ul class="features-list">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 2 GB RAM</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> 100% CPU</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> 5GB NVMe SSD</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</li>
-                        </ul>
-                        <div class="price-wrap"><span class="price">₹99.00</span><span class="price-period">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn-order">Order via Discord ></a>
-                    </div>
-
-                    <!-- Minecraft 4GB -->
-                    <div class="pricing-card featured">
-                        <div class="popular-badge" style="background: var(--primary-green);">Most Popular</div>
-                        <h3 class="plan-name">Minecraft 4GB</h3>
-                        <p class="plan-sub">Premium Server</p>
-                        
-                        <ul class="features-list">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 4 GB RAM</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> 200% CPU</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> 8GB NVMe SSD</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</li>
-                        </ul>
-                        <div class="price-wrap"><span class="price">₹115.00</span><span class="price-period">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn-order">Order via Discord ></a>
-                    </div>
-
-                    <!-- Minecraft 6GB -->
-                    <div class="pricing-card">
-                        <h3 class="plan-name">Minecraft 6GB</h3>
-                        <p class="plan-sub">Premium Server</p>
-                        
-                        <ul class="features-list">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 6 GB RAM</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> 250% CPU</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> 10GB NVMe SSD</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</li>
-                        </ul>
-                        <div class="price-wrap"><span class="price">₹170.00</span><span class="price-period">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn-order">Order via Discord ></a>
+            <div class="filter-group" style="margin-bottom: 2rem;">
+                <span class="filter-label">3. Select Software</span>
+                <div class="filter-options">
+                    <div class="software-box">
+                        <div class="soft-title">
+                            <!-- Dirt block representation -->
+                            <div style="width: 20px; height: 20px; background: #8B5A2B; border-top: 5px solid #556B2F; border-radius: 2px;"></div>
+                            Minecraft <span class="badge-green">Featured</span>
+                        </div>
+                        <span class="soft-desc">Build, explore, and survive in the ultimate sandbox game</span>
                     </div>
                 </div>
             </div>
-        </main>
 
-        <!-- ================= CLOUD PAGE (VPS) ================= -->
-        <main id="cloud" class="page-view">
-            <div class="container">
-                <div class="page-header">
-                    <h1>VPS Hosting <span>Solutions</span></h1>
-                    <p>High-performance virtual private servers with full root access, Gen4 NVMe storage, and 24/7 dedicated support. Perfect for developers.</p>
+            <div class="filter-group">
+                <span class="filter-label">4. Choose Plan</span>
+                <div class="card-grid">
+                    <!-- MC 2GB Alt -->
+                    <div class="plan-card">
+                        <div class="card-title">
+                            <div style="width: 24px; height: 16px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div>
+                            Minecraft 2GB
+                        </div>
+                        <div class="specs-list">
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 2 GB RAM</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> 100% CPU</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> 5GB NVMe SSD</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</div>
+                        </div>
+                        <div class="price-box">₹99.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order green">Order Now ></a>
+                    </div>
+                    <!-- MC 2GB -->
+                    <div class="plan-card">
+                        <div class="card-title">
+                            <div style="width: 24px; height: 16px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div>
+                            Minecraft 2GB
+                        </div>
+                        <div class="specs-list">
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 2 GB RAM</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> 100% CPU</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> 5GB NVMe SSD</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</div>
+                        </div>
+                        <div class="price-box">₹58.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order green">Order Now ></a>
+                    </div>
+                    <!-- MC 4GB -->
+                    <div class="plan-card">
+                        <div class="card-title">
+                            <div style="width: 24px; height: 16px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div>
+                            Minecraft 4GB
+                        </div>
+                        <div class="specs-list">
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 4 GB RAM</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> 200% CPU</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> 8GB NVMe SSD</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</div>
+                        </div>
+                        <div class="price-box">₹115.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order green">Order Now ></a>
+                    </div>
+                    <!-- MC 6GB -->
+                    <div class="plan-card">
+                        <div class="card-title">
+                            <div style="width: 24px; height: 16px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div>
+                            Minecraft 6GB
+                        </div>
+                        <div class="specs-list">
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 6 GB RAM</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> 250% CPU</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> 10GB NVMe SSD</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</div>
+                        </div>
+                        <div class="price-box">₹170.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order green">Order Now ></a>
+                    </div>
+                    <!-- MC 8GB -->
+                    <div class="plan-card">
+                        <div class="card-title">
+                            <div style="width: 24px; height: 16px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div>
+                            Minecraft 8GB
+                        </div>
+                        <div class="specs-list">
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 8 GB RAM</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> 300% CPU</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> 12GB NVMe SSD</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</div>
+                        </div>
+                        <div class="price-box">₹230.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order green">Order Now ></a>
+                    </div>
+                    <!-- MC 12GB -->
+                    <div class="plan-card">
+                        <div class="card-title">
+                            <div style="width: 24px; height: 16px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div>
+                            Minecraft 12GB
+                        </div>
+                        <div class="specs-list">
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 12 GB RAM</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> 400% CPU</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> 15GB NVMe SSD</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</div>
+                        </div>
+                        <div class="price-box">₹350.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order green">Order Now ></a>
+                    </div>
+                    <!-- MC 16GB -->
+                    <div class="plan-card">
+                        <div class="card-title">
+                            <div style="width: 24px; height: 16px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div>
+                            Minecraft 16GB
+                        </div>
+                        <div class="specs-list">
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 16 GB RAM</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> 500% CPU</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> 20GB NVMe SSD</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</div>
+                        </div>
+                        <div class="price-box">₹460.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order green">Order Now ></a>
+                    </div>
+                    <!-- MC 24GB -->
+                    <div class="plan-card">
+                        <div class="card-title">
+                            <div style="width: 24px; height: 16px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div>
+                            Minecraft 24GB
+                        </div>
+                        <div class="specs-list">
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 24 GB RAM</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> 600% CPU</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> 20GB NVMe SSD</div>
+                            <div class="spec-item text-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</div>
+                        </div>
+                        <div class="price-box">₹690.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order green">Order Now ></a>
+                    </div>
                 </div>
+            </div>
+        </section>
+    </main>
 
+    <!-- ================= CLOUD (VPS) ================= -->
+    <main id="view-cloud" class="view">
+        <div class="container">
+            <h2 class="section-title">VPS Hosting <span class="text-blue">Solutions</span></h2>
+            <p class="section-subtitle">High-performance virtual private servers with full root access, SSD storage, and 24/7 support. Perfect for developers and businesses.</p>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <span class="filter-label">1. Location</span>
+                    <div class="filter-options">
+                        <div class="f-btn active blue">
+                            <div style="width: 20px; height: 14px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div> Mumbai
+                        </div>
+                        <div class="f-btn">
+                            <div style="width: 20px; height: 14px; background: linear-gradient(to bottom, #ED2939 50%, #FFFFFF 50%); position: relative; border-radius: 2px;">
+                                <div style="position: absolute; top: 1px; left: 1px; color: white; font-size: 6px;">☾</div>
+                            </div> Singapore
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">2. CPU Type</span>
+                    <div class="filter-options">
+                        <div class="f-btn active blue">
+                            <div style="width: 16px; height: 16px; background: #FF4500; display: inline-block;"></div> AMD Epyc 7
+                        </div>
+                        <div class="f-btn">
+                            <div style="width: 16px; height: 16px; background: #0071C5; display: inline-block; border-radius: 50%;"></div> intel Gold 6149
+                        </div>
+                        <div class="f-btn">
+                            <div style="width: 16px; height: 16px; background: #FF4500; display: inline-block;"></div> AMD Ryzen 9
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label">3. Choose Plan</span>
                 <div class="vps-list">
                     <!-- BVPS2 -->
                     <div class="vps-card">
-                        <div class="vps-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> BVPS2</div>
-                        <div class="vps-spec"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Cores</span><span>1 Core</span></div>
-                        <div class="vps-spec"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span><span>4 GB</span></div>
-                        <div class="vps-spec"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> NVMe SSD</span><span>50 GB</span></div>
-                        <div class="vps-price">₹250.00<span style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Order via Discord</a>
+                        <div class="vps-badge">
+                            <div style="width: 24px; height: 24px; background: #FF4500; display: inline-block;"></div> BVPS2
+                        </div>
+                        <div class="vps-stat">
+                            <svg class="vps-stat-icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+                            <div class="vps-stat-info">
+                                <span class="vps-stat-label">Cores</span>
+                                <span class="vps-stat-val text-blue">1 Core</span>
+                            </div>
+                        </div>
+                        <div class="vps-stat">
+                            <svg class="vps-stat-icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg>
+                            <div class="vps-stat-info">
+                                <span class="vps-stat-label">DDR5 RAM</span>
+                                <span class="vps-stat-val text-blue">4 GB</span>
+                            </div>
+                        </div>
+                        <div class="vps-stat">
+                            <svg class="vps-stat-icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>
+                            <div class="vps-stat-info">
+                                <span class="vps-stat-label">NVMe SSD</span>
+                                <span class="vps-stat-val text-blue">50 GB</span>
+                            </div>
+                        </div>
+                        <div class="vps-price">₹250.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-client" style="padding: 0.8rem 1.5rem; font-size: 1rem;">Order Now ></a>
                     </div>
                     <!-- BVPS3 -->
                     <div class="vps-card">
-                        <div class="vps-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> BVPS3</div>
-                        <div class="vps-spec"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Cores</span><span>2 Cores</span></div>
-                        <div class="vps-spec"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span><span>8 GB</span></div>
-                        <div class="vps-spec"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> NVMe SSD</span><span>100 GB</span></div>
-                        <div class="vps-price">₹350.00<span style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Order via Discord</a>
+                        <div class="vps-badge">
+                            <div style="width: 24px; height: 24px; background: #FF4500; display: inline-block;"></div> BVPS3
+                        </div>
+                        <div class="vps-stat">
+                            <svg class="vps-stat-icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+                            <div class="vps-stat-info">
+                                <span class="vps-stat-label">Cores</span>
+                                <span class="vps-stat-val text-blue">2 Cores</span>
+                            </div>
+                        </div>
+                        <div class="vps-stat">
+                            <svg class="vps-stat-icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg>
+                            <div class="vps-stat-info">
+                                <span class="vps-stat-label">DDR5 RAM</span>
+                                <span class="vps-stat-val text-blue">8 GB</span>
+                            </div>
+                        </div>
+                        <div class="vps-stat">
+                            <svg class="vps-stat-icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>
+                            <div class="vps-stat-info">
+                                <span class="vps-stat-label">NVMe SSD</span>
+                                <span class="vps-stat-val text-blue">100 GB</span>
+                            </div>
+                        </div>
+                        <div class="vps-price">₹350.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-client" style="padding: 0.8rem 1.5rem; font-size: 1rem;">Order Now ></a>
                     </div>
                     <!-- BVPS4 -->
                     <div class="vps-card">
-                        <div class="vps-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> BVPS4</div>
-                        <div class="vps-spec"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Cores</span><span>3 Cores</span></div>
-                        <div class="vps-spec"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span><span>12 GB</span></div>
-                        <div class="vps-spec"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> NVMe SSD</span><span>150 GB</span></div>
-                        <div class="vps-price">₹500.00<span style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Order via Discord</a>
+                        <div class="vps-badge">
+                            <div style="width: 24px; height: 24px; background: #FF4500; display: inline-block;"></div> BVPS4
+                        </div>
+                        <div class="vps-stat">
+                            <svg class="vps-stat-icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+                            <div class="vps-stat-info">
+                                <span class="vps-stat-label">Cores</span>
+                                <span class="vps-stat-val text-blue">3 Cores</span>
+                            </div>
+                        </div>
+                        <div class="vps-stat">
+                            <svg class="vps-stat-icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg>
+                            <div class="vps-stat-info">
+                                <span class="vps-stat-label">DDR5 RAM</span>
+                                <span class="vps-stat-val text-blue">12 GB</span>
+                            </div>
+                        </div>
+                        <div class="vps-stat">
+                            <svg class="vps-stat-icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>
+                            <div class="vps-stat-info">
+                                <span class="vps-stat-label">NVMe SSD</span>
+                                <span class="vps-stat-val text-blue">150 GB</span>
+                            </div>
+                        </div>
+                        <div class="vps-price">₹500.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-client" style="padding: 0.8rem 1.5rem; font-size: 1rem;">Order Now ></a>
                     </div>
                 </div>
             </div>
-        </main>
 
-        <!-- ================= DEDICATED PAGE ================= -->
-        <main id="dedicated" class="page-view">
-            <div class="container">
-                <div class="page-header">
-                    <h1>Dedicated Server <span>Solutions</span></h1>
-                    <p>Bare metal dedicated servers with enterprise-grade hardware, full root control, and maximum raw performance.</p>
+            <!-- OS Section -->
+            <div style="margin-top: 6rem; text-align: center;">
+                <div style="background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); padding: 4px 16px; border-radius: 12px; display: inline-block; font-size: 0.8rem; margin-bottom: 1rem;">Operating Systems</div>
+                <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Choose your <span class="text-blue">OS</span></h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Select from a wide range of popular operating systems. All images are pre-configured and ready to deploy instantly on your VPS.</p>
+                
+                <div class="os-grid">
+                    <div class="os-item"><div class="os-icon" style="background: rgba(226, 73, 57, 0.1);"><div style="width:40px; height:40px; background:#E24939; border-radius:50%;"></div></div><span class="os-name">Ubuntu</span></div>
+                    <div class="os-item"><div class="os-icon" style="background: rgba(0, 164, 239, 0.1);"><div style="width:40px; height:40px; background:#00A4EF;"></div></div><span class="os-name">Windows</span></div>
+                    <div class="os-item"><div class="os-icon" style="background: rgba(41, 65, 114, 0.1);"><div style="width:40px; height:40px; background:#294172; border-radius: 8px;"></div></div><span class="os-name">Fedora</span></div>
+                    <div class="os-item"><div class="os-icon" style="background: rgba(215, 10, 83, 0.1);"><div style="width:40px; height:40px; background:#D70A53; border-radius: 50%;"></div></div><span class="os-name">Debian</span></div>
+                    <div class="os-item"><div class="os-icon" style="background: rgba(38, 142, 234, 0.1);"><div style="width:40px; height:40px; background:#268EEA; border-radius: 50%;"></div></div><span class="os-name">Kali Linux</span></div>
+                    <div class="os-item"><div class="os-icon"><svg class="text-blue" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div><span class="os-name">Custom ISO</span></div>
                 </div>
+            </div>
+        </div>
+    </main>
 
-                <div class="pricing-grid">
-                    <!-- Basic -->
-                    <div class="pricing-card">
-                        <div class="popular-badge">Starter</div>
-                        <h3 class="plan-name">VDS-R9-Basic</h3>
-                        <p class="plan-sub">Mumbai Location</p>
-                        <div class="specs-grid">
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> AMD Ryzen 9</span><span class="spec-value">6 Cores</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span><span class="spec-value">32 GB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> NVMe SSD</span><span class="spec-value">1 TB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Bandwidth</span><span class="spec-value">Unlimited</span></div>
+    <!-- ================= DEDICATED ================= -->
+    <main id="view-dedicated" class="view">
+        <div class="container">
+            <h2 class="section-title">Dedicated Server <span class="text-blue">Solutions</span></h2>
+            <p class="section-subtitle">Bare metal dedicated servers with enterprise-grade hardware, full control, and maximum performance for demanding applications.</p>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <span class="filter-label">1. CPU Type</span>
+                    <div class="filter-options">
+                        <div class="f-btn"><div style="width: 16px; height: 16px; background: #FF4500; display: inline-block;"></div> Ryzen 5 5600G</div>
+                        <div class="f-btn active blue"><div style="width: 16px; height: 16px; background: #FF4500; display: inline-block;"></div> AMD Ryzen 9</div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">2. Location</span>
+                    <div class="filter-options">
+                        <div class="f-btn active blue">
+                            <div style="width: 20px; height: 14px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div> Mumbai
                         </div>
-                        <ul class="features-list">
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label">3. Choose Plan</span>
+                <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));">
+                    <!-- VDS-R9-Basic -->
+                    <div class="plan-card">
+                        <div class="popular-tag">Popular</div>
+                        <div class="card-title">
+                            <div style="width: 24px; height: 16px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div>
+                            VDS-R9-Basic
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: -1rem; margin-bottom: 1.5rem;">Mumbai</div>
+                        
+                        <div class="specs-grid-2">
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> AMD Ryzen 9</span>
+                                <span class="spec-val">6 Cores</span>
+                            </div>
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span>
+                                <span class="spec-val">32 GB</span>
+                            </div>
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> NVMe SSD</span>
+                                <span class="spec-val">1 TB</span>
+                            </div>
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Bandwidth</span>
+                                <span class="spec-val">Unlimited</span>
+                            </div>
+                        </div>
+
+                        <ul class="dedi-list">
                             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Full Root Access</li>
                             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 24/7 Support</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 99.9% Uptime</li>
                             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> DDoS Protection</li>
-                        </ul>
-                        <div class="price-wrap"><span class="price">₹14000.00</span><span class="price-period">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn-order">Order via Discord ></a>
-                    </div>
-
-                    <!-- Standard -->
-                    <div class="pricing-card featured">
-                        <div class="popular-badge">Best Value</div>
-                        <h3 class="plan-name">VDS-R9-Standard</h3>
-                        <p class="plan-sub">Mumbai Location</p>
-                        <div class="specs-grid">
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> AMD Ryzen 9</span><span class="spec-value">8 Cores</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span><span class="spec-value">64 GB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> NVMe SSD</span><span class="spec-value">2 TB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Bandwidth</span><span class="spec-value">Unlimited</span></div>
-                        </div>
-                        <ul class="features-list">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Full Root Access</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 24/7 Support</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> DDoS Protection</li>
-                        </ul>
-                        <div class="price-wrap"><span class="price">₹20000.00</span><span class="price-period">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn-order">Order via Discord ></a>
-                    </div>
-
-                    <!-- Enterprise -->
-                    <div class="pricing-card">
-                        <div class="popular-badge" style="background: #8b5cf6;">Enterprise</div>
-                        <h3 class="plan-name">VDS-R9-Enterprise</h3>
-                        <p class="plan-sub">Mumbai Location</p>
-                        <div class="specs-grid">
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> AMD Ryzen 9</span><span class="spec-value">16 Cores</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span><span class="spec-value">256 GB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> NVMe SSD</span><span class="spec-value">8 TB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Bandwidth</span><span class="spec-value">Unlimited</span></div>
-                        </div>
-                        <ul class="features-list">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Full Root Access</li>
                             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Free Backups</li>
                             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Priority Support</li>
                         </ul>
-                        <div class="price-wrap"><span class="price">₹28000.00</span><span class="price-period">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn-order">Order via Discord ></a>
+                        <div class="price-box">₹14000.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order blue">Order Now ></a>
                     </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- ================= WEB HOSTING PAGE ================= -->
-        <main id="web" class="page-view">
-            <div class="container">
-                <div class="page-header">
-                    <h1>Premium <span>WebHosting</span></h1>
-                    <p>Fast, reliable, and secure web hosting solutions for your websites, forums, and applications.</p>
-                </div>
-
-                <div class="pricing-grid">
-                    <!-- Starter Web -->
-                    <div class="pricing-card">
-                        <h3 class="plan-name">Starter</h3>
-                        <p class="plan-sub">Web Hosting</p>
-                        <div class="specs-grid">
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span><span class="spec-value">1 vCPU</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span><span class="spec-value">1 GB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> SSD Storage</span><span class="spec-value">5 GB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Transfer</span><span class="spec-value">100 GB</span></div>
+                    <!-- VDS-R9-Standard -->
+                    <div class="plan-card" style="border-color: rgba(59, 130, 246, 0.5);">
+                        <div class="popular-tag" style="background: #2563EB;">Best Value</div>
+                        <div class="card-title">
+                            <div style="width: 24px; height: 16px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div>
+                            VDS-R9-Standard
                         </div>
-                        <ul class="features-list">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 99.9% Uptime Guarantee</li>
-                        </ul>
-                        <div class="price-wrap"><span class="price">₹69.00</span><span class="price-period">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn-order">Order via Discord ></a>
-                    </div>
-
-                    <!-- Basic Web -->
-                    <div class="pricing-card featured">
-                        <div class="popular-badge">Popular</div>
-                        <h3 class="plan-name">Basic</h3>
-                        <p class="plan-sub">Web Hosting</p>
-                        <div class="specs-grid">
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span><span class="spec-value">1 vCPU</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span><span class="spec-value">2 GB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> SSD Storage</span><span class="spec-value">10 GB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Transfer</span><span class="spec-value">250 GB</span></div>
-                        </div>
-                        <ul class="features-list">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 99.9% Uptime Guarantee</li>
-                        </ul>
-                        <div class="price-wrap"><span class="price">₹100.00</span><span class="price-period">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn-order">Order via Discord ></a>
-                    </div>
-
-                    <!-- Standard Web -->
-                    <div class="pricing-card">
-                        <h3 class="plan-name">Standard</h3>
-                        <p class="plan-sub">Web Hosting</p>
-                        <div class="specs-grid">
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span><span class="spec-value">1 vCPU</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span><span class="spec-value">3 GB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> SSD Storage</span><span class="spec-value">12 GB</span></div>
-                            <div class="spec-item"><span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Transfer</span><span class="spec-value">300 GB</span></div>
-                        </div>
-                        <ul class="features-list">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 99.9% Uptime Guarantee</li>
-                        </ul>
-                        <div class="price-wrap"><span class="price">₹199.00</span><span class="price-period">/mo</span></div>
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" rel="noopener noreferrer" class="btn-order">Order via Discord ></a>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- ================= LEGAL PAGE (Complete ToS) ================= -->
-        <main id="legal" class="page-view">
-            <div class="container">
-                <div class="page-header" style="margin-bottom: 3rem;">
-                    <h1>Terms of <span>Service</span></h1>
-                    <p>Last updated: June 2026</p>
-                </div>
-
-                <div class="legal-layout">
-                    <!-- Sidebar (Using javascript:void(0) to prevent breaking the hash routing) -->
-                    <div class="legal-sidebar">
-                        <a href="javascript:void(0)" onclick="scrollToLegal('sec-1', this)" class="active">1. Acceptance of Terms</a>
-                        <a href="javascript:void(0)" onclick="scrollToLegal('sec-2', this)">2. Service Description</a>
-                        <a href="javascript:void(0)" onclick="scrollToLegal('sec-3', this)">3. User Responsibilities</a>
-                        <a href="javascript:void(0)" onclick="scrollToLegal('sec-4', this)">4. Acceptable Use Policy</a>
-                        <a href="javascript:void(0)" onclick="scrollToLegal('sec-5', this)">5. Payment Terms</a>
-                        <a href="javascript:void(0)" onclick="scrollToLegal('sec-6', this)">6. Service Level Agreement</a>
-                        <a href="javascript:void(0)" onclick="scrollToLegal('sec-7', this)">7. Data Protection</a>
-                        <a href="javascript:void(0)" onclick="scrollToLegal('sec-8', this)">8. Limitation of Liability</a>
-                        <a href="javascript:void(0)" onclick="scrollToLegal('sec-9', this)">9. Termination</a>
-                    </div>
-
-                    <!-- Content (Complete 9 Points) -->
-                    <div class="legal-content">
-                        <h2 id="sec-1">1. Acceptance of Terms</h2>
-                        <p>By accessing and using MollyNodes services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service. Your continued use establishes your compliance and understanding of all clauses within this document.</p>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: -1rem; margin-bottom: 1.5rem;">Mumbai</div>
                         
-                        <h2 id="sec-2">2. Service Description</h2>
-                        <p>We provide premium VPS hosting, bare-metal dedicated servers, game server hosting, and web hosting solutions. Our services are subject to availability and may be modified, suspended, or discontinued at any time without notice. We reserve the right to upgrade infrastructure parameters to maintain peak performance without prior authorization from the client.</p>
+                        <div class="specs-grid-2">
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> AMD Ryzen 9</span>
+                                <span class="spec-val">8 Cores</span>
+                            </div>
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span>
+                                <span class="spec-val">64 GB</span>
+                            </div>
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> NVMe SSD</span>
+                                <span class="spec-val">2 TB</span>
+                            </div>
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Bandwidth</span>
+                                <span class="spec-val">Unlimited</span>
+                            </div>
+                        </div>
+
+                        <ul class="dedi-list">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Full Root Access</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 24/7 Support</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 99.9% Uptime</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> DDoS Protection</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Free Backups</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Priority Support</li>
+                        </ul>
+                        <div class="price-box">₹20000.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order blue">Order Now ></a>
+                    </div>
+                    <!-- VDS-R9-Enterprise -->
+                    <div class="plan-card">
+                        <div class="popular-tag" style="background: #3B82F6;">Enterprise</div>
+                        <div class="card-title">
+                            <div style="width: 24px; height: 16px; background: linear-gradient(to bottom, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%); border-radius: 2px;"></div>
+                            VDS-R9-Enterprise
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: -1rem; margin-bottom: 1.5rem;">Mumbai</div>
                         
-                        <h2 id="sec-3">3. User Responsibilities</h2>
-                        <p>You are solely responsible for maintaining the confidentiality of your account information, billing details, and for all activities that occur under your server node. You agree to notify us immediately via our Discord support system of any unauthorized use or suspected security breaches pertaining to your infrastructure.</p>
+                        <div class="specs-grid-2">
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> AMD Ryzen 9</span>
+                                <span class="spec-val">16 Cores</span>
+                            </div>
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span>
+                                <span class="spec-val">256 GB</span>
+                            </div>
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> NVMe SSD</span>
+                                <span class="spec-val">8 TB</span>
+                            </div>
+                            <div class="spec-col">
+                                <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Bandwidth</span>
+                                <span class="spec-val">Unlimited</span>
+                            </div>
+                        </div>
 
-                        <h2 id="sec-4">4. Acceptable Use Policy</h2>
-                        <p>Our infrastructure is strictly monitored for network health. Any abuse including but not limited to originating DDoS attacks, network scanning, spamming, hosting malicious software, circumventing rate limits, or violating local/international laws will result in immediate termination without eligibility for a refund.</p>
-
-                        <h2 id="sec-5">5. Payment Terms</h2>
-                        <p>All payments are currently processed manually via our designated Discord support ticketing system. Services are billed on a recurring monthly cycle unless stated otherwise. Failure to clear pending invoices within 3 days of the due date will result in service suspension, and data may be wiped after 7 days of non-payment.</p>
-
-                        <h2 id="sec-6">6. Service Level Agreement (SLA)</h2>
-                        <p>MollyNodes guarantees a 99.9% network uptime. In the event of a catastrophic hardware failure, our engineering team commits to initiating hardware replacement protocols within 4 hours of confirmed failure. Compensation for SLA breaches will be provided as account credits upon review.</p>
-
-                        <h2 id="sec-7">7. Data Protection & Backups</h2>
-                        <p>We respect your privacy and comply with standard data protection regulations. We do not sell your personal data. However, unless an enterprise backup add-on is explicitly purchased, maintaining data backups is the sole responsibility of the customer. MollyNodes is not liable for any data loss under any circumstances.</p>
-
-                        <h2 id="sec-8">8. Limitation of Liability</h2>
-                        <p>Under no circumstances shall MollyNodes, its directors, or employees be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or the inability to use the service. This includes, but is not limited to, reliance by a user on any information obtained from MollyNodes.</p>
-
-                        <h2 id="sec-9">9. Termination & Cancellation</h2>
-                        <p>We reserve the right to suspend or terminate services for any violation of these terms at our sole discretion. Users may cancel their services at any time by opening a cancellation ticket in our Discord server at least 24 hours prior to their next billing cycle.</p>
+                        <ul class="dedi-list">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Full Root Access</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 24/7 Support</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 99.9% Uptime</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> DDoS Protection</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Free Backups</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Priority Support</li>
+                        </ul>
+                        <div class="price-box">₹28000.00<span>/mo</span></div>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order blue">Order Now ></a>
                     </div>
                 </div>
             </div>
         </main>
 
-    </div> <!-- End of #app -->
+        <!-- ================= DISCORD BOT ================= -->
+        <main id="view-bot" class="view">
+            <div class="container">
+                <h2 class="section-title text-green">Discord Bot Hosting</h2>
+                <p class="section-subtitle">Reliable and affordable Discord bot hosting with 24/7 uptime, Node.js support, and easy deployment. Perfect for developers and communities.</p>
+                
+                <div class="filters">
+                    <div class="filter-group">
+                        <span class="filter-label">1. Plan Type</span>
+                        <div class="filter-options">
+                            <div class="f-btn active green"><div style="width: 16px; height: 16px; background: #10B981; border-radius: 2px;"></div> Budget Plans</div>
+                            <div class="f-btn"><div style="width: 16px; height: 16px; background: transparent; border: 1px solid #10B981; border-radius: 2px;"></div> Premium Plans</div>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 MollyNodes. All Rights Reserved. Empowering your digital infrastructure.</p>
-        </div>
-    </footer>
+                <div class="filter-group">
+                    <span class="filter-label">2. Choose Plan</span>
+                    <div class="card-grid">
+                        <!-- Starter -->
+                        <div class="plan-card" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2);">
+                            <div class="popular-tag" style="background: var(--accent-green);">Popular</div>
+                            <div class="card-title">
+                                <div style="background: rgba(16, 185, 129, 0.1); padding: 8px; border-radius: 8px; color: var(--accent-green); font-weight: 800;">JS</div>
+                                <div>Starter<div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">Discord Bot</div></div>
+                            </div>
+                            
+                            <div class="specs-grid-2">
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span>
+                                    <span class="spec-val">1 vCPU</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span>
+                                    <span class="spec-val">512 MB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> SSD Storage</span>
+                                    <span class="spec-val">5 GB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Bandwidth</span>
+                                    <span class="spec-val">Unlimited</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                                <svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 24/7 Uptime
+                            </div>
+                            <div class="price-box">₹79.00<span>/mo</span></div>
+                            <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order green" style="background: var(--accent-green); color: white;">Order Now ></a>
+                        </div>
+                        <!-- Basic -->
+                        <div class="plan-card">
+                            <div class="card-title">
+                                <div style="background: rgba(16, 185, 129, 0.1); padding: 8px; border-radius: 8px; color: var(--accent-green); font-weight: 800;">JS</div>
+                                <div>Basic<div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">Discord Bot</div></div>
+                            </div>
+                            
+                            <div class="specs-grid-2">
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span>
+                                    <span class="spec-val">1 vCPU</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span>
+                                    <span class="spec-val">1 GB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> SSD Storage</span>
+                                    <span class="spec-val">10 GB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Bandwidth</span>
+                                    <span class="spec-val">Unlimited</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                                <svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 24/7 Uptime
+                            </div>
+                            <div class="price-box">₹149.00<span>/mo</span></div>
+                            <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order green">Order Now ></a>
+                        </div>
+                        <!-- Standard -->
+                        <div class="plan-card">
+                            <div class="card-title">
+                                <div style="background: rgba(16, 185, 129, 0.1); padding: 8px; border-radius: 8px; color: var(--accent-green); font-weight: 800;">JS</div>
+                                <div>Standard<div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">Discord Bot</div></div>
+                            </div>
+                            
+                            <div class="specs-grid-2">
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span>
+                                    <span class="spec-val">2 vCPU</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span>
+                                    <span class="spec-val">2 GB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> SSD Storage</span>
+                                    <span class="spec-val">20 GB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Bandwidth</span>
+                                    <span class="spec-val">Unlimited</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                                <svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 24/7 Uptime
+                            </div>
+                            <div class="price-box">₹189.00<span>/mo</span></div>
+                            <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order green">Order Now ></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
 
-    <!-- JavaScript Engine -->
+        <!-- ================= WEB HOSTING ================= -->
+        <main id="view-web" class="view">
+            <div class="container">
+                <h2 class="section-title">Premium Web <span class="text-blue">Hosting</span></h2>
+                <p class="section-subtitle">Fast, reliable, and secure web hosting solutions for your websites and applications.</p>
+                
+                <div class="filters">
+                    <div class="filter-group">
+                        <span class="filter-label">1. Plan Type</span>
+                        <div class="filter-options">
+                            <div class="f-btn active blue"><div style="width: 16px; height: 16px; background: #3B82F6; border-radius: 2px;"></div> Shared Hosting</div>
+                            <div class="f-btn"><div style="width: 16px; height: 16px; background: #FF4500; border-radius: 2px;"></div> Business Hosting</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">2. Choose Plan</span>
+                    <div class="card-grid">
+                        <!-- Starter -->
+                        <div class="plan-card">
+                            <div class="popular-tag">Popular</div>
+                            <div class="card-title" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                                Starter<div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">Web Hosting</div>
+                            </div>
+                            
+                            <div class="specs-grid-2">
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span>
+                                    <span class="spec-val">1 vCPU</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span>
+                                    <span class="spec-val">1 GB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> SSD Storage</span>
+                                    <span class="spec-val">5 GB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Monthly Transfer</span>
+                                    <span class="spec-val">100 GB</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                                <svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 99.9% Uptime
+                            </div>
+                            <div class="price-box">₹69.00<span>/mo</span></div>
+                            <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order blue" style="background: var(--accent-blue); color: white;">Order Now ></a>
+                        </div>
+                        <!-- Basic -->
+                        <div class="plan-card">
+                            <div class="card-title" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                                Basic<div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">Web Hosting</div>
+                            </div>
+                            
+                            <div class="specs-grid-2">
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span>
+                                    <span class="spec-val">1 vCPU</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span>
+                                    <span class="spec-val">2 GB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> SSD Storage</span>
+                                    <span class="spec-val">10 GB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Monthly Transfer</span>
+                                    <span class="spec-val">250 GB</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                                <svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 99.9% Uptime
+                            </div>
+                            <div class="price-box">₹100.00<span>/mo</span></div>
+                            <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order blue" style="background: var(--accent-blue); color: white;">Order Now ></a>
+                        </div>
+                        <!-- Standard -->
+                        <div class="plan-card">
+                            <div class="card-title" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                                Standard<div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">Web Hosting</div>
+                            </div>
+                            
+                            <div class="specs-grid-2">
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span>
+                                    <span class="spec-val">1 vCPU</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span>
+                                    <span class="spec-val">3 GB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg> SSD Storage</span>
+                                    <span class="spec-val">12 GB</span>
+                                </div>
+                                <div class="spec-col">
+                                    <span class="spec-label"><svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Monthly Transfer</span>
+                                    <span class="spec-val">300 GB</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                                <svg class="icon-sm text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 99.9% Uptime
+                            </div>
+                            <div class="price-box">₹199.00<span>/mo</span></div>
+                            <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-order blue" style="background: var(--accent-blue); color: white;">Order Now ></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ================= LEGAL ================= -->
+        <main id="view-legal" class="view">
+            <div class="container legal-layout">
+                <div class="legal-sidebar">
+                    <div class="legal-nav">
+                        <a href="javascript:void(0)" onclick="switchLegal(1, this)" class="active">1. Acceptance of Terms</a>
+                        <a href="javascript:void(0)" onclick="switchLegal(2, this)">2. Service Description</a>
+                        <a href="javascript:void(0)" onclick="switchLegal(3, this)">3. User Responsibilities</a>
+                        <a href="javascript:void(0)" onclick="switchLegal(4, this)">4. Acceptable Use Policy</a>
+                        <a href="javascript:void(0)" onclick="switchLegal(5, this)">5. Payment Terms</a>
+                        <a href="javascript:void(0)" onclick="switchLegal(6, this)">6. Service Level Agreement</a>
+                        <a href="javascript:void(0)" onclick="switchLegal(7, this)">7. Data Protection</a>
+                        <a href="javascript:void(0)" onclick="switchLegal(8, this)">8. Limitation of Liability</a>
+                        <a href="javascript:void(0)" onclick="switchLegal(9, this)">9. Termination</a>
+                        <a href="javascript:void(0)" onclick="switchLegal(10, this)">10. Changes to Terms</a>
+                    </div>
+                </div>
+                
+                <div class="legal-content">
+                    <div class="legal-title">
+                        <h1>Terms of <span class="text-blue">Service</span></h1>
+                        <p>Last updated: July 2025</p>
+                    </div>
+
+                    <div id="legal-1">
+                        <h2>1. Acceptance of Terms</h2>
+                        <p>By accessing and using our services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.</p>
+                    </div>
+
+                    <div id="legal-2">
+                        <h2>2. Service Description</h2>
+                        <p>We provide VPS hosting, dedicated servers, and game server hosting services. Our services are subject to availability and may be modified, suspended, or discontinued at any time without notice.</p>
+                    </div>
+
+                    <div id="legal-3">
+                        <h2>3. User Responsibilities</h2>
+                        <p>You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.</p>
+                    </div>
+
+                    <div id="legal-4">
+                        <h2>4. Acceptable Use Policy</h2>
+                        <p>Our infrastructure is strictly monitored. Any abuse including but not limited to DDoS attacks, spamming, hosting malicious software, or violating local laws will result in immediate termination without refund.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Routing Engine -->
     <script>
-        // Smooth Scrolling for Legal Sidebar
-        function scrollToLegal(id, element) {
-            // Remove active class from all sidebar links
-            document.querySelectorAll('.legal-sidebar a').forEach(el => el.classList.remove('active'));
-            // Add active class to clicked
-            if(element) element.classList.add('active');
-            // Scroll to specific heading smoothly
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Hash-based Routing Engine
         function handleRouting() {
-            let hash = window.location.hash || '#home';
-            const targetPage = document.querySelector(hash);
+            let hash = window.location.hash || '#games';
+            let viewId = hash.replace('#', 'view-');
             
-            // If the hash is not recognized as a page view, fallback to home
-            if (!targetPage || !targetPage.classList.contains('page-view')) {
-                hash = '#home'; 
+            // Check if view exists
+            if (!document.getElementById(viewId)) {
+                hash = '#games';
+                viewId = 'view-games';
             }
 
-            // Hide all pages & remove active classes
-            document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+            // Hide all views
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            // Remove active class from nav links
+            document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
 
-            // Show target page
-            document.querySelector(hash).classList.add('active');
-
-            // Set nav active state (excluding the external Discord link if present)
-            const activeLink = document.querySelector(`.nav-links a[href="${hash}"]`);
-            if(activeLink) activeLink.classList.add('active');
-
-            // Scroll to top when changing pages
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Show current view
+            document.getElementById(viewId).classList.add('active');
             
-            // Close mobile menu if open
-            const navLinksMenu = document.querySelector('.nav-links');
-            if (navLinksMenu.classList.contains('active-mobile')) {
-                navLinksMenu.classList.remove('active-mobile');
-            }
+            // Highlight nav link
+            let navLink = document.getElementById('nav-' + hash.replace('#', ''));
+            if(navLink) navLink.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
         window.addEventListener('hashchange', handleRouting);
         window.addEventListener('DOMContentLoaded', handleRouting);
 
-        // Navbar blur and resize effect on scroll
-        const navbar = document.querySelector('.navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 30) {
-                navbar.style.background = 'rgba(5, 7, 10, 0.95)';
-                navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
-                navbar.style.padding = '0.5rem 0';
-            } else {
-                navbar.style.background = 'rgba(5, 7, 10, 0.75)';
-                navbar.style.boxShadow = 'none';
-                navbar.style.padding = '0.8rem 0';
-            }
-        });
-
-        // Mobile Menu Toggle logic
-        const mobileToggleBtn = document.querySelector('.mobile-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        
-        mobileToggleBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active-mobile');
-        });
+        // Simple function to fake the legal scroll/switch to match screenshot UI
+        function switchLegal(num, el) {
+            document.querySelectorAll('.legal-nav a').forEach(a => a.classList.remove('active'));
+            el.classList.add('active');
+            // For visual replica, we keep the content static but in a real app this would swap text
+        }
     </script>
 </body>
 </html>
+
+```
