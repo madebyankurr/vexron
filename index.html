@@ -3,99 +3,778 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vexron Hosting | Premium Game & VPS Solutions</title>
+    <title>Vexron Hosting | Premium Servers & Web Hosting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050508;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --accent: #6366f1;
-            --text: #ffffff;
-            --text-dim: #94a3b8;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
+            --bg-dark: #07090e;
+            --bg-panel: rgba(20, 24, 39, 0.4);
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --glass-hover: rgba(255, 255, 255, 0.08);
+            
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --primary-green: #16a34a;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            --blur-radius: blur(16px);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
-        
-        /* Navbar */
-        nav { position: fixed; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 100; backdrop-filter: blur(10px); background: rgba(5,5,8,0.8); border-bottom: 1px solid var(--border); }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--accent); }
-        .nav-links a { color: var(--text); margin-left: 20px; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
 
-        /* Hero */
-        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 10%; }
-        h1 { font-size: 4rem; margin-bottom: 1rem; background: linear-gradient(90deg, #6366f1, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .btn { padding: 12px 30px; border-radius: 8px; border: none; background: var(--accent); color: white; cursor: pointer; font-weight: 600; margin-top: 20px; transition: 0.3s; }
-        
-        /* Glass Cards */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 50px 5%; }
-        .card { background: var(--card-bg); padding: 30px; border-radius: 15px; border: 1px solid var(--border); backdrop-filter: blur(5px); transition: 0.3s; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        
-        /* Pricing */
-        .pricing { padding: 50px 5%; text-align: center; }
-        .price-card { background: var(--glass); padding: 40px; border-radius: 20px; border: 1px solid var(--border); flex: 1; margin: 10px; }
-        .pricing-flex { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 0%, rgba(37, 99, 235, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 85% 100%, rgba(22, 163, 74, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
 
-        /* FAQ */
-        .faq { padding: 50px 10%; }
-        details { background: var(--glass); padding: 15px; border-radius: 10px; margin-bottom: 10px; }
-        
-        /* Footer */
-        footer { padding: 50px; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
 
-        .fade-in { animation: fadeIn 1s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 1.2rem 0;
+            z-index: 1000;
+            background: rgba(7, 9, 14, 0.7);
+            backdrop-filter: var(--blur-radius);
+            -webkit-backdrop-filter: var(--blur-radius);
+            border-bottom: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span { color: var(--primary-blue); }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--primary-blue); }
+
+        .btn {
+            padding: 0.7rem 1.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-blue { background: var(--primary-blue); color: #fff; }
+        .btn-blue:hover { background: var(--primary-blue-hover); box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); }
+        
+        .btn-outline { background: rgba(255, 255, 255, 0.05); border-color: var(--glass-border); color: #fff; }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 160px 0 100px 0;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-blue);
+            display: block;
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        .hero-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .hero-feature-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.8rem;
+            backdrop-filter: var(--blur-radius);
+            transition: var(--transition);
+        }
+
+        .hero-feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(37, 99, 235, 0.3);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .hf-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .hf-header h3 { font-size: 1.1rem; font-weight: 600; }
+        .hf-icon { color: var(--primary-blue); }
+        .hero-feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* --- Services / Pricing Tabs --- */
+        .services-section { padding: 80px 0; }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .tab-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active {
+            background: rgba(37, 99, 235, 0.1);
+            border-color: var(--primary-blue);
+            color: #fff;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active { display: block; }
+
+        /* Pricing Grids */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            transition: var(--transition);
+            backdrop-filter: var(--blur-radius);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: translateY(-5px);
+        }
+
+        /* Green theme for Game Servers */
+        .theme-green .pricing-card:hover { border-color: var(--primary-green); }
+        .theme-green .btn-order { background: rgba(22, 163, 74, 0.1); color: var(--primary-green); border: 1px solid rgba(22, 163, 74, 0.3); }
+        .theme-green .btn-order:hover { background: var(--primary-green); color: #fff; }
+        
+        .popular-badge {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            background: var(--primary-blue);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .plan-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .plan-sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .spec-item { display: flex; flex-direction: column; gap: 4px; }
+        .spec-label { display: flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.8rem; }
+        .spec-value { font-size: 1rem; font-weight: 600; }
+        .spec-icon { width: 14px; height: 14px; opacity: 0.7; color: var(--primary-blue); }
+        .theme-green .spec-icon { color: var(--primary-green); }
+
+        .features-list { flex-grow: 1; margin-bottom: 2rem; }
+        .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+        .features-list li svg { width: 16px; height: 16px; color: var(--primary-blue); }
+        .theme-green .features-list li svg { color: var(--primary-green); }
+
+        .price-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 1.5rem;
+        }
+        .price { font-size: 2.5rem; font-weight: 800; }
+        .price-period { color: var(--text-muted); }
+
+        .btn-order {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            background: var(--primary-blue);
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-order:hover { background: var(--primary-blue-hover); }
+
+        /* VPS Horizontal Layout */
+        .vps-card {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto auto auto;
+            align-items: center;
+            gap: 2rem;
+            background: var(--bg-panel);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+        .vps-card:hover { border-color: var(--primary-blue); background: rgba(255,255,255,0.03); }
+        .vps-badge { background: #1e293b; padding: 10px; border-radius: 8px; display: flex; align-items: center; gap: 10px; font-weight: 700; border: 1px solid var(--glass-border); }
+        .vps-badge img { width: 24px; }
+        .vps-spec { display: flex; flex-direction: column; gap: 4px; }
+        .vps-spec span:first-child { color: var(--text-muted); font-size: 0.8rem; display: flex; align-items: center; gap: 5px; }
+        .vps-spec span:last-child { font-weight: 600; color: var(--primary-blue); }
+        .vps-price { font-size: 1.25rem; font-weight: 700; }
+
+        /* --- Footer & Discord CTA --- */
+        .discord-cta {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.1) 0%, rgba(20, 24, 39, 0.8) 100%);
+            border: 1px solid rgba(88, 101, 242, 0.2);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .discord-cta h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .discord-cta p { color: var(--text-muted); margin-bottom: 2rem; }
+        .btn-discord { background: #5865F2; border-color: #5865F2; color: #fff; }
+        .btn-discord:hover { background: #4752C4; box-shadow: 0 0 20px rgba(88, 101, 242, 0.4); }
+
+        footer {
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-content p { margin: 0 auto 2.5rem auto; }
+            .vps-card { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 3rem; }
+            .hero-features { grid-template-columns: 1fr; }
+            .vps-card { grid-template-columns: 1fr; text-align: center; gap: 1rem; }
+            .vps-badge { justify-content: center; }
+            .tabs { flex-wrap: wrap; }
+        }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">VEXRON</div>
-        <div class="nav-links">
-            <a href="#home">Home</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Vexron<span>Hosting</span>
+            </a>
+            <div class="nav-links">
+                <a href="#home">Games</a>
+                <a href="#cloud">Cloud</a>
+                <a href="#dedicated">Dedicated</a>
+                <a href="#web">WebHosting</a>
+                <a href="#legal">Legal</a>
+            </div>
+            <a href="#" class="btn btn-blue">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                CLIENT SPACE
+            </a>
         </div>
     </nav>
 
-    <section id="home" class="hero fade-in">
-        <h1>Unmatched Performance.</h1>
-        <p>Premium Game Hosting & VPS solutions with enterprise-grade security.</p>
-        <button class="btn">Get Started</button>
-    </section>
-
-    <section id="features" class="grid">
-        <div class="card"><h3>High Performance</h3><p>AMD Ryzen powered nodes for maximum speed.</p></div>
-        <div class="card"><h3>DDoS Protection</h3><p>Always-on 480Gbps mitigation included.</p></div>
-        <div class="card"><h3>Instant Setup</h3><p>Get your server running in under 60 seconds.</p></div>
-    </section>
-
-    <section id="pricing" class="pricing">
-        <h2>Pricing Plans</h2>
-        <div class="pricing-flex">
-            <div class="price-card"><h3>Basic</h3><h2>$4.99</h2><p>4GB RAM / 50GB NVMe</p></div>
-            <div class="price-card"><h3>Pro</h3><h2>$9.99</h2><p>8GB RAM / 100GB NVMe</p></div>
-            <div class="price-card"><h3>Ultimate</h3><h2>$19.99</h2><p>16GB RAM / 256GB NVMe</p></div>
+    <!-- Hero Section (Recreated from 1000039555.jpg) -->
+    <section class="hero fade-up" id="home">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1>Host your own<br><span>Minecraft Servers</span></h1>
+                <p>Experience lightning-fast performance, unbeatable reliability, and 24/7 support for all your favorite games.</p>
+                <div style="display: flex; gap: 1rem; justify-content: flex-start;">
+                    <button class="btn btn-blue" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Get started →</button>
+                    <button class="btn btn-outline">Learn More ↗</button>
+                </div>
+            </div>
+            
+            <div class="hero-features">
+                <div class="hero-feature-card">
+                    <div class="hf-header">
+                        <h3>Instant Setup</h3>
+                        <svg class="hf-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <p>Get your server running in under 60 seconds</p>
+                </div>
+                <div class="hero-feature-card">
+                    <div class="hf-header">
+                        <h3>DDoS Protection</h3>
+                        <svg class="hf-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <p>Enterprise-grade security for your servers</p>
+                </div>
+                <div class="hero-feature-card">
+                    <div class="hf-header">
+                        <h3>99.9% Uptime</h3>
+                        <svg class="hf-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <p>Reliable hosting with guaranteed availability</p>
+                </div>
+                <div class="hero-feature-card">
+                    <div class="hf-header">
+                        <h3>24/7 Support</h3>
+                        <svg class="hf-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <p>Expert help whenever you need it</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="faq" class="faq">
-        <h2>FAQ</h2>
-        <details><summary>Is DDoS protection included?</summary><p>Yes, all plans come with enterprise-level protection.</p></details>
-        <details><summary>Can I upgrade my plan?</summary><p>Yes, upgrades are instant via the client area.</p></details>
+    <!-- Services / Pricing Section -->
+    <section class="services-section fade-up" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Premium Solutions</h2>
+            
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('web')">Web Hosting</button>
+                <button class="tab-btn" onclick="switchTab('game')">Minecraft Servers</button>
+                <button class="tab-btn" onclick="switchTab('vps')">VPS Hosting</button>
+            </div>
+
+            <!-- Tab 1: Web Hosting (From 1000039575.jpg) -->
+            <div id="tab-web" class="tab-content active">
+                <div class="pricing-grid">
+                    <!-- Starter Web -->
+                    <div class="pricing-card">
+                        <div class="popular-badge" style="background: rgba(255,255,255,0.1); color: var(--text-muted);">Shared</div>
+                        <h3 class="plan-name">Starter</h3>
+                        <p class="plan-sub">Web Hosting</p>
+                        
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span>
+                                <span class="spec-value">1 vCPU</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span>
+                                <span class="spec-value">1 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> SSD Storage</span>
+                                <span class="spec-value">5 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Monthly Transfer</span>
+                                <span class="spec-value">100 GB</span>
+                            </div>
+                        </div>
+
+                        <ul class="features-list">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 99.9% Uptime</li>
+                        </ul>
+
+                        <div class="price-wrap">
+                            <span class="price">₹69.00</span><span class="price-period">/mo</span>
+                        </div>
+                        <button class="btn-order">Order Now ></button>
+                    </div>
+
+                    <!-- Basic Web -->
+                    <div class="pricing-card" style="border-color: var(--primary-blue);">
+                        <div class="popular-badge">Popular</div>
+                        <h3 class="plan-name">Basic</h3>
+                        <p class="plan-sub">Web Hosting</p>
+                        
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span>
+                                <span class="spec-value">1 vCPU</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span>
+                                <span class="spec-value">2 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> SSD Storage</span>
+                                <span class="spec-value">10 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Monthly Transfer</span>
+                                <span class="spec-value">250 GB</span>
+                            </div>
+                        </div>
+
+                        <ul class="features-list">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 99.9% Uptime</li>
+                        </ul>
+
+                        <div class="price-wrap">
+                            <span class="price">₹100.00</span><span class="price-period">/mo</span>
+                        </div>
+                        <button class="btn-order">Order Now ></button>
+                    </div>
+
+                    <!-- Standard Web -->
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Standard</h3>
+                        <p class="plan-sub">Web Hosting</p>
+                        
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Shared CPU</span>
+                                <span class="spec-value">1 vCPU</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR4 RAM</span>
+                                <span class="spec-value">3 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> SSD Storage</span>
+                                <span class="spec-value">12 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label"><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 1 0 2.6-6.4L2 9"/></svg> Monthly Transfer</span>
+                                <span class="spec-value">300 GB</span>
+                            </div>
+                        </div>
+
+                        <ul class="features-list">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 99.9% Uptime</li>
+                        </ul>
+
+                        <div class="price-wrap">
+                            <span class="price">₹199.00</span><span class="price-period">/mo</span>
+                        </div>
+                        <button class="btn-order">Order Now ></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Minecraft Servers (From 1000039561.jpg / 1000039563.jpg) -->
+            <div id="tab-game" class="tab-content theme-green">
+                <div class="pricing-grid">
+                    <!-- Minecraft 2GB -->
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Minecraft 2GB</h3>
+                        <p class="plan-sub">Premium Server</p>
+                        
+                        <ul class="features-list" style="margin-top: 1rem;">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 2 GB RAM</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> 100% CPU</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> 5GB NVMe SSD</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</li>
+                        </ul>
+
+                        <div class="price-wrap">
+                            <span class="price">₹99.00</span><span class="price-period">/mo</span>
+                        </div>
+                        <button class="btn-order">Order Now ></button>
+                    </div>
+
+                    <!-- Minecraft 4GB -->
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Minecraft 4GB</h3>
+                        <p class="plan-sub">Premium Server</p>
+                        
+                        <ul class="features-list" style="margin-top: 1rem;">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 4 GB RAM</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> 200% CPU</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> 8GB NVMe SSD</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</li>
+                        </ul>
+
+                        <div class="price-wrap">
+                            <span class="price">₹115.00</span><span class="price-period">/mo</span>
+                        </div>
+                        <button class="btn-order">Order Now ></button>
+                    </div>
+
+                    <!-- Minecraft 6GB -->
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Minecraft 6GB</h3>
+                        <p class="plan-sub">Premium Server</p>
+                        
+                        <ul class="features-list" style="margin-top: 1rem;">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> 6 GB RAM</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> 250% CPU</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> 10GB NVMe SSD</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> DDoS Protection</li>
+                        </ul>
+
+                        <div class="price-wrap">
+                            <span class="price">₹170.00</span><span class="price-period">/mo</span>
+                        </div>
+                        <button class="btn-order">Order Now ></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: VPS Hosting (From 1000039565.jpg) -->
+            <div id="tab-vps" class="tab-content">
+                <div class="vps-list">
+                    <!-- BVPS2 -->
+                    <div class="vps-card">
+                        <div class="vps-badge">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+                            BVPS2
+                        </div>
+                        
+                        <div class="vps-spec">
+                            <span><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Cores</span>
+                            <span>1 Core</span>
+                        </div>
+                        
+                        <div class="vps-spec">
+                            <span><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span>
+                            <span>4 GB</span>
+                        </div>
+                        
+                        <div class="vps-spec">
+                            <span><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> NVMe SSD</span>
+                            <span>50 GB</span>
+                        </div>
+                        
+                        <div class="vps-price">₹250.00<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">/mo</span></div>
+                        
+                        <button class="btn btn-outline" style="width: 100%;">Order Now ></button>
+                    </div>
+
+                    <!-- BVPS3 -->
+                    <div class="vps-card">
+                        <div class="vps-badge">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+                            BVPS3
+                        </div>
+                        
+                        <div class="vps-spec">
+                            <span><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Cores</span>
+                            <span>2 Cores</span>
+                        </div>
+                        
+                        <div class="vps-spec">
+                            <span><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span>
+                            <span>8 GB</span>
+                        </div>
+                        
+                        <div class="vps-spec">
+                            <span><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> NVMe SSD</span>
+                            <span>100 GB</span>
+                        </div>
+                        
+                        <div class="vps-price">₹350.00<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">/mo</span></div>
+                        
+                        <button class="btn btn-outline" style="width: 100%;">Order Now ></button>
+                    </div>
+
+                    <!-- BVPS4 -->
+                    <div class="vps-card">
+                        <div class="vps-badge">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+                            BVPS4
+                        </div>
+                        
+                        <div class="vps-spec">
+                            <span><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg> Cores</span>
+                            <span>3 Cores</span>
+                        </div>
+                        
+                        <div class="vps-spec">
+                            <span><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 6h20M2 18h20"/></svg> DDR5 RAM</span>
+                            <span>12 GB</span>
+                        </div>
+                        
+                        <div class="vps-spec">
+                            <span><svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/></svg> NVMe SSD</span>
+                            <span>150 GB</span>
+                        </div>
+                        
+                        <div class="vps-price">₹500.00<span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">/mo</span></div>
+                        
+                        <button class="btn btn-outline" style="width: 100%;">Order Now ></button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <footer>&copy; 2026 Vexron Hosting. All rights reserved.</footer>
+    <!-- Discord CTA -->
+    <section class="container fade-up">
+        <div class="discord-cta">
+            <h2>Need Custom Specifications?</h2>
+            <p>Join our Discord community to request custom dedicated server builds and talk directly with our support team.</p>
+            <a href="#" class="btn btn-discord">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+                Join Discord
+            </a>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Vexron Hosting. All Rights Reserved. Not affiliated with AnuVerse.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
     <script>
-        // Simple fade-in trigger
-        window.addEventListener('scroll', () => {
-            document.querySelectorAll('.card, .price-card').forEach(el => {
-                if(el.getBoundingClientRect().top < window.innerHeight) el.style.opacity = '1';
+        // Tab Switcher Logic
+        function switchTab(tabId) {
+            // Remove active class from all buttons and contents
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked button and target content
+            event.currentTarget.classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        // Scroll Animation Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+
+        // Navbar blur on scroll
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(7, 9, 14, 0.95)';
+                navbar.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+            } else {
+                navbar.style.background = 'rgba(7, 9, 14, 0.7)';
+                navbar.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+            }
         });
     </script>
 </body>
 </html>
-
