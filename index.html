@@ -1,11 +1,11 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MollyNodes | Premium Hosting</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Outfit font added for the blocky tech heading from the screenshot, Inter for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-main: #0B0E14;
@@ -23,6 +23,7 @@
             --accent-green-hover: #059669;
             
             --font-main: 'Inter', sans-serif;
+            --font-heading: 'Outfit', sans-serif;
             --transition: all 0.2s ease;
         }
 
@@ -48,7 +49,7 @@
             display: flex; align-items: center; justify-content: space-between; padding: 0 2rem;
         }
         .nav-left { display: flex; align-items: center; gap: 3rem; }
-        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px; }
+        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px; font-family: var(--font-heading);}
         .logo svg { color: var(--accent-blue); width: 28px; height: 28px; }
         
         .nav-links { display: flex; gap: 2rem; }
@@ -66,7 +67,6 @@
         .nav-icons { display: flex; gap: 1rem; color: var(--text-secondary); align-items: center; }
         .nav-icons svg { cursor: pointer; transition: var(--transition); }
         .nav-icons svg:hover { color: var(--text-primary); }
-        .flag-icon { width: 24px; border-radius: 2px; }
 
         .btn-client {
             background: var(--accent-blue); color: white; padding: 0.6rem 1.2rem;
@@ -85,33 +85,65 @@
         .cookie-btn { right: 2rem; background: var(--accent-blue); }
 
         /* View Setup */
-        .view { display: none; padding-top: 100px; min-height: 100vh; padding-bottom: 100px; }
+        .view { display: none; padding-top: 70px; min-height: 100vh; padding-bottom: 100px; }
         .view.active { display: block; }
 
-        /* Hero Section */
-        .hero { position: relative; padding: 4rem 0; overflow: hidden; }
+        /* --- HERO SECTION EXACT MATCH --- */
+        .hero { 
+            position: relative; 
+            padding: 8rem 0 6rem 0; 
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+        }
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, rgba(11,14,20,1) 30%, rgba(11,14,20,0.5) 100%), 
-                        url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzE1MUEyNSIvPjwvc3ZnPg==') center/cover;
+            background: linear-gradient(90deg, rgba(11,14,20,1) 0%, rgba(11,14,20,0.85) 40%, rgba(11,14,20,0.6) 100%), 
+                        url('https://images.unsplash.com/photo-1607513746994-51f737a405fa?q=80&w=2000') center/cover;
             z-index: -1;
         }
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .hero-content h1 { font-size: 4.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; }
-        .hero-content h1 span { color: var(--accent-blue); }
-        .hero-content p { color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 2.5rem; max-width: 90%; }
-        
-        .hero-btns { display: flex; gap: 1rem; align-items: center; }
-        .btn-primary { 
-            background: var(--accent-blue); color: white; padding: 0.8rem 1.8rem; 
-            border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 8px; 
+        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
+        .hero-content h1 { 
+            font-size: 5rem; 
+            font-weight: 900; 
+            line-height: 1.1; 
+            margin-bottom: 1.5rem; 
+            font-family: var(--font-heading);
+            letter-spacing: -1px;
+            text-transform: capitalize;
         }
-        .btn-secondary { color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .hero-content h1 span { color: var(--accent-blue); }
+        .hero-content p { 
+            color: var(--text-primary); 
+            font-size: 1.15rem; 
+            margin-bottom: 2rem; 
+            max-width: 90%; 
+            line-height: 1.6;
+        }
+        
+        .hero-btns { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;}
+        .btn-primary { 
+            background: var(--accent-blue); color: white; padding: 0.8rem 1.5rem; 
+            border-radius: 6px; font-weight: 600; display: flex; align-items: center; gap: 10px; 
+            font-size: 1rem; transition: var(--transition);
+        }
+        .btn-primary:hover { background: var(--accent-blue-hover); }
+        .btn-secondary { 
+            color: var(--text-primary); font-weight: 600; display: flex; align-items: center; gap: 10px; 
+            padding: 0.8rem 1.5rem; font-size: 1rem; transition: var(--transition);
+        }
+        .btn-secondary:hover { color: var(--accent-blue); }
 
-        .hero-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .h-feature { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; }
-        .h-f-top { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
-        .h-f-title { font-weight: 700; font-size: 1.1rem; }
+        .hero-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+        .h-feature { 
+            background: rgba(255,255,255,0.03); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            padding: 1.5rem; 
+            border-radius: 12px; 
+            backdrop-filter: blur(12px);
+        }
+        .h-f-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
+        .h-f-title { font-weight: 700; font-size: 1.1rem; color: #fff;}
         .h-f-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; }
 
         /* Filter Sections (Common) */
@@ -149,7 +181,6 @@
         }
         .plan-card:hover { border-color: var(--text-secondary); }
         .card-title { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.2rem; margin-bottom: 1.5rem; }
-        .card-title img { width: 24px; border-radius: 2px; }
         
         .popular-tag {
             position: absolute; top: 1rem; right: 1rem; background: var(--accent-blue);
@@ -160,7 +191,6 @@
         .spec-item { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; font-weight: 500; }
         .spec-item svg { width: 18px; height: 18px; flex-shrink: 0; }
         
-        /* Two column specs for Web/Bot */
         .specs-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 0.5rem; margin-bottom: 2rem; flex-grow: 1;}
         .spec-col { display: flex; flex-direction: column; gap: 4px; }
         .spec-label { display: flex; align-items: center; gap: 6px; color: var(--text-secondary); font-size: 0.8rem; }
@@ -177,7 +207,6 @@
         .btn-order.green:hover { background: var(--accent-green); color: white; }
         .btn-order.blue:hover { background: var(--accent-blue); color: white; }
         
-        /* Dedicated Spec specific */
         .dedi-list { border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: 0.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem;}
         .dedi-list li { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary); }
         .dedi-list li svg { color: var(--accent-blue); width: 16px; height: 16px; }
@@ -263,24 +292,38 @@
     </nav>
 
     <!-- ================= GAMES (HOME + MINECRAFT) ================= -->
-    <main id="view-games" class="view active">
-        <!-- Hero Section -->
+    <main id="view-games" class="view active" style="padding-top: 0;">
+        
+        <!-- Hero Section Exact Match -->
         <section class="hero">
             <div class="hero-bg"></div>
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <h1>Host your own<br><span>Minecraft Servers</span></h1>
+                    <h1>
+                        Host your own<br>
+                        <span>Minecraft</span><br>
+                        Servers
+                    </h1>
                     <p>Experience lightning-fast performance, unbeatable reliability, and 24/7 support for all your favorite games.</p>
-                    <div class="hero-btns">
-                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-primary">Get started →</a>
-                        <a href="#" class="btn-secondary">Learn More <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+                    
+                    <div class="hero-btns" style="margin-bottom: 0.8rem;">
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-primary">
+                            Get started <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="https://discord.gg/vexonite-the-new-era-of-hosting-s-1429570428548157502" target="_blank" class="btn-secondary">
+                            Learn More <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                        </a>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; margin-left: 5px;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Get started for free!
                     </div>
                 </div>
+                
                 <div class="hero-features">
                     <div class="h-feature">
                         <div class="h-f-top">
                             <span class="h-f-title">Instant Setup</span>
-                            <svg class="text-blue icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                            <svg class="text-blue icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="6" rx="2"/><rect x="4" y="14" width="16" height="6" rx="2"/><line x1="8" y1="7" x2="8" y2="7"/><line x1="8" y1="17" x2="8" y2="17"/></svg>
                         </div>
                         <p class="h-f-desc">Get your server running in under 60 seconds</p>
                     </div>
@@ -301,7 +344,7 @@
                     <div class="h-feature">
                         <div class="h-f-top">
                             <span class="h-f-title">24/7 Support</span>
-                            <svg class="text-blue icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <svg class="text-blue icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
                         </div>
                         <p class="h-f-desc">Expert help whenever you need it</p>
                     </div>
@@ -1083,14 +1126,10 @@
         window.addEventListener('hashchange', handleRouting);
         window.addEventListener('DOMContentLoaded', handleRouting);
 
-        // Simple function to fake the legal scroll/switch to match screenshot UI
         function switchLegal(num, el) {
             document.querySelectorAll('.legal-nav a').forEach(a => a.classList.remove('active'));
             el.classList.add('active');
-            // For visual replica, we keep the content static but in a real app this would swap text
         }
     </script>
 </body>
 </html>
-
-```
